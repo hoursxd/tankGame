@@ -8,9 +8,9 @@ import java.awt.Rectangle;
 public class Bullet extends Frame{
 	private static final int SPEED = 10;
 
-	 static final int WIDTH = ResourceMgr.BulletD.getWidth();
+	 static final int WIDTH = ResourceMgr.bulletD.getWidth();
 
-	 static final int HEIGHT = ResourceMgr.BulletD.getHeight();
+	 static final int HEIGHT = ResourceMgr.bulletD.getHeight();
 	
 	private int x,y;
 	private Dir dir;
@@ -40,16 +40,16 @@ public class Bullet extends Frame{
 		
 		switch(dir) {
 		case LEFT:
-			g.drawImage(ResourceMgr.BulletL, x,y,null);
+			g.drawImage(ResourceMgr.bulletL, x,y,null);
 			break;
 		case RIGHT:
-			g.drawImage(ResourceMgr.BulletR, x,y,null);
+			g.drawImage(ResourceMgr.bulletR, x,y,null);
 			break;
 		case UP:
-			g.drawImage(ResourceMgr.BulletU, x,y,null);
+			g.drawImage(ResourceMgr.bulletU, x,y,null);
 			break;
 		case DOWN:
-			g.drawImage(ResourceMgr.BulletD, x,y,null);
+			g.drawImage(ResourceMgr.bulletD, x,y,null);
 			break;
 		default:
 			break;
@@ -90,6 +90,17 @@ public class Bullet extends Frame{
 		if(rect.intersects(rectTank)) {
 			t.die();
 			this.die();
+			Explode e = new Explode(t.getX(),t.getY(),this.tf);
+			
+			new Thread( new Runnable() {
+				@Override
+				public void run() {
+					new Audio("audio/explode.wav").run();
+					
+				}
+			}).start();
+			
+			
 		}
 		
 	}

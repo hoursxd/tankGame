@@ -19,6 +19,8 @@ public class Explode {
 		this.x = x;
 		this.y = y;
 		this.tf = tf;
+		
+		
 	}
 	
 	public void paint(Graphics g) {
@@ -26,7 +28,7 @@ public class Explode {
 		g.drawImage(ResourceMgr.explodes[step++],x,y,null);
 		
 		if(step >= ResourceMgr.explodes.length) {
-			step = 0;
+			return;
 		}
 		
 	}
