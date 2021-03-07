@@ -9,7 +9,6 @@ public class Tank extends Frame{
 	private static final int SPEED = 5;
 	
 	static final int WIDTH = ResourceMgr.tankD.getWidth();
-
 	static final int HEIGHT = ResourceMgr.tankD.getHeight();
 	
 	private int x,y;

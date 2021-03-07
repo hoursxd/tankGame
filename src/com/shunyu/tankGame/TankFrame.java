@@ -18,8 +18,9 @@ public class TankFrame extends Frame{
 	ArrayList<Tank> tanks = new ArrayList<>();
 	
 	Tank t = new Tank(200,200,Dir.DOWN,this,Group.BLUE);
+	Explode e = new Explode(100,100,this);
 	
-	
+	 
 	public TankFrame() {
 		setSize(GAME_WIDTH,GAME_HEIGHT);
 		setResizable(false);
@@ -53,6 +54,7 @@ public class TankFrame extends Frame{
 				bs.get(i).collideWith(tanks.get(j));
 			}
 		}
+		e.paint(g);
 	}
 	
 	Image offScreenImage = null;

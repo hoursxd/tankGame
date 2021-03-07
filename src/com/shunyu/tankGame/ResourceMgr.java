@@ -26,7 +26,7 @@ public class ResourceMgr {
 			
 			
 			for(int i =1;i<=explodes.length;i++) {
-				explodes[i-1] = ImageIO.read(ResourceMgr.class.getClassLoader().getResourceAsStream("images/e"+"i"+".gif"));
+				explodes[i-1] = ImageIO.read(ResourceMgr.class.getClassLoader().getResourceAsStream("images/e"+i+".gif"));
 			}
 		} catch (IOException e) {
 			// TODO Auto-generated catch block
