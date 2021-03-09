@@ -12,11 +12,11 @@ import java.awt.Color;
 
 public class TankFrame extends Frame{
 
-	static final int GAME_WIDTH = 800;
-	static final int GAME_HEIGHT = 600;
+	static final int GAME_WIDTH = 1080;
+	static final int GAME_HEIGHT = 720;
 	ArrayList<Bullet> bs = new ArrayList<>();
 	ArrayList<Tank> tanks = new ArrayList<>();
-	
+	ArrayList<Explode> explodes = new ArrayList<>();
 	Tank t = new Tank(200,200,Dir.DOWN,this,Group.BLUE);
 	
 	
@@ -47,6 +47,10 @@ public class TankFrame extends Frame{
 		
 		for(int i = 0; i<tanks.size();i++) {
 			tanks.get(i).paint(g);
+		}
+		
+		for(int i = 0; i<explodes.size();i++) {
+			explodes.get(i).paint(g);
 		}
 		
 		for(int i = 0; i<bs.size() ; i++) {

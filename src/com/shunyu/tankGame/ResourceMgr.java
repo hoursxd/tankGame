@@ -7,18 +7,24 @@ import javax.imageio.ImageIO;
 
 
 public class ResourceMgr {
-	public static BufferedImage tankL, tankU, tankR, tankD;
+	public static BufferedImage redTankU, redTankL, redTankR, redTankD;
+	public static BufferedImage blueTankU, blueTankL, blueTankR, blueTankD;
 	public static BufferedImage bulletL, bulletU, bulletR, bulletD;
 	public static BufferedImage[] explodes = new BufferedImage[16];
 	
 	 
 	static {
 		try {
-			tankU = ImageIO.read(ResourceMgr.class.getClassLoader().getResourceAsStream("images/GoodTank1.png"));
-			tankL = ImageUtil.rotateImage(tankU, -90);
-			tankR = ImageUtil.rotateImage(tankU, 90);
-			tankD = ImageUtil.rotateImage(tankU, 180);
+			redTankU = ImageIO.read(ResourceMgr.class.getClassLoader().getResourceAsStream("images/GoodTank1.png"));
+			redTankL = ImageUtil.rotateImage(redTankU, -90);
+			redTankR = ImageUtil.rotateImage(redTankU, 90);
+			redTankD = ImageUtil.rotateImage(redTankU, 180);
 			
+			
+			blueTankU = ImageIO.read(ResourceMgr.class.getClassLoader().getResourceAsStream("images/BadTank1.png"));
+			blueTankL = ImageUtil.rotateImage(blueTankU, -90);
+			blueTankR = ImageUtil.rotateImage(blueTankU, 90);
+			blueTankD = ImageUtil.rotateImage(blueTankU, 180);
 			
 			bulletU = ImageIO.read(ResourceMgr.class.getClassLoader().getResourceAsStream("images/bulletU.png"));
 			bulletL = ImageUtil.rotateImage(bulletU, -90);

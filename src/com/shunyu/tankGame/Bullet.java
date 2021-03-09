@@ -8,14 +8,16 @@ import java.awt.Rectangle;
 public class Bullet extends Frame{
 	private static final int SPEED = 10;
 
-	 static final int WIDTH = ResourceMgr.bulletD.getWidth();
-
-	 static final int HEIGHT = ResourceMgr.bulletD.getHeight();
+	static final int WIDTH = ResourceMgr.bulletD.getWidth();
+	static final int HEIGHT = ResourceMgr.bulletD.getHeight();
 	
 	private int x,y;
 	private Dir dir;
 	private TankFrame tf;
 	private Group group;
+	
+	Rectangle rect = new Rectangle();
+	
 	
 	private boolean living = true;
 	
@@ -29,6 +31,13 @@ public class Bullet extends Frame{
 		this.dir = dir;
 		this.tf = tf;
 		this.group = group;
+		
+		
+		rect.x = this.x;
+		rect.y = this.y;
+		rect.width = WIDTH;
+		rect.height = HEIGHT;
+		
 	}
 
 
@@ -76,6 +85,10 @@ public class Bullet extends Frame{
 			break;
 		}
 		
+		rect.x = x;
+		rect.y = y;
+		
+		
 		if(x<0||y<0||x>TankFrame.GAME_WIDTH||y>TankFrame.GAME_HEIGHT) {
 			living = false;
 		}
@@ -84,13 +97,15 @@ public class Bullet extends Frame{
 	public void collideWith(Tank t) {
 		if(this.group == t.getGroup()) return;
 		
-		Rectangle rect = new Rectangle(this.x,this.y,WIDTH,HEIGHT);
-		Rectangle rectTank = new Rectangle(t.getX(),t.getY(),Tank.WIDTH,Tank.HEIGHT);
-		
-		if(rect.intersects(rectTank)) {
+		if(this.rect.intersects(t.rect)) {
 			t.die();
 			this.die();
-			Explode e = new Explode(t.getX(),t.getY(),this.tf);
+			
+			int eX = t.getX() + t.WIDTH/2 - Explode.WIDTH/2;
+			int eY = t.getY() + t.HEIGHT/2 - Explode.HEIGHT/2;
+			
+			
+			  tf.explodes.add(new Explode(eX,eY,this.tf));
 			
 			new Thread( new Runnable() {
 				@Override
@@ -103,7 +118,7 @@ public class Bullet extends Frame{
 			
 		}
 		
-	}
+	} 
 	
 	private void die() {
 		this.living = false;
