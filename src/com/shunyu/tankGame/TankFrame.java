@@ -18,9 +18,9 @@ public class TankFrame extends Frame{
 	ArrayList<Tank> tanks = new ArrayList<>();
 	ArrayList<Explode> explodes = new ArrayList<>();
 	Tank t = new Tank(200,200,Dir.DOWN,this,Group.BLUE);
-	
-	
+	DefaultFireStrategy ds = new DefaultFireStrategy(); 
 	 
+	
 	public TankFrame() {
 		setSize(GAME_WIDTH,GAME_HEIGHT);
 		setResizable(false);
@@ -39,8 +39,9 @@ public class TankFrame extends Frame{
 	}
 	
 	@Override
-	public void paint(Graphics g) {
-		t.paint(g);  
+	public void paint(Graphics g) { 
+		t.paint(g);
+		
 		for(int i = 0; i<bs.size();i++) {
 			bs.get(i).paint(g);
 		}
@@ -57,6 +58,8 @@ public class TankFrame extends Frame{
 			for(int j = 0; j<tanks.size() ; j++) {
 				bs.get(i).collideWith(tanks.get(j));
 			}
+			bs.get(i).collideWith(t);
+			
 		}
 	}
 	

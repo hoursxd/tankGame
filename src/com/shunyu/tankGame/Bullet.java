@@ -38,6 +38,8 @@ public class Bullet extends Frame{
 		rect.width = WIDTH;
 		rect.height = HEIGHT;
 		
+		tf.bs.add(this);
+		
 	}
 
 
@@ -105,7 +107,7 @@ public class Bullet extends Frame{
 			int eY = t.getY() + t.HEIGHT/2 - Explode.HEIGHT/2;
 			
 			
-			  tf.explodes.add(new Explode(eX,eY,this.tf));
+			tf.explodes.add(new Explode(eX,eY,this.tf));
 			
 			new Thread( new Runnable() {
 				@Override

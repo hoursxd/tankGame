@@ -13,12 +13,15 @@ public class Tank extends Frame{
 	static final int WIDTH = ResourceMgr.redTankU.getWidth();
 	static final int HEIGHT = ResourceMgr.redTankU.getHeight();
 	
-	private int x,y;
-	private Dir dir = Dir.DOWN;
-	private TankFrame tf;
-	private Group group;
+	int x;
+
+	int y;
+	Dir dir = Dir.DOWN;
+	TankFrame tf;
+	Group group;
 	private Random random = new Random();
 	Rectangle rect = new Rectangle();
+	FireStrategy ds = new FourDirFireStrategy(); 
 	
 	private boolean moving = true;
 	private boolean living = true;
@@ -123,10 +126,7 @@ public class Tank extends Frame{
 
 	public void fire() {
 		
-		int bx = this.x + WIDTH/2 - Bullet.WIDTH/2;
-		int by = this.y + HEIGHT/2 - Bullet.HEIGHT/2;
-		
-		tf.bs.add(new Bullet(bx,by,this.dir,tf,this.group));
+		ds.fire(this);
 		
 	}
 
