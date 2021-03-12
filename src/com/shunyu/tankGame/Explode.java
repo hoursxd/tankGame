@@ -2,7 +2,9 @@ package com.shunyu.tankGame;
 
 import java.awt.Graphics;
 
-public class Explode {
+import abstractfactory.BaseExplode;
+
+public class Explode extends BaseExplode{
 
 	static final int WIDTH = ResourceMgr.explodes[0].getWidth();
 
