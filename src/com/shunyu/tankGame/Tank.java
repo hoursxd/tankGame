@@ -1,12 +1,12 @@
 package com.shunyu.tankGame;
 
-import java.awt.Color;
-import java.awt.Frame;
-import java.awt.Graphics;
-import java.awt.Rectangle;
+import com.shunyu.GameModel.GameModel;
+import com.shunyu.entity.GameObject;
+
+import java.awt.*;
 import java.util.Random;
 
-public class Tank extends Frame{
+public class Tank extends GameObject {
 	
 	private static final int SPEED = 5;
 	
@@ -16,37 +16,40 @@ public class Tank extends Frame{
 	int x;
 
 	int y;
+
+	int oldX , oldY;
+
+	public Rectangle rect = new Rectangle();
+	public Group group;
 	Dir dir = Dir.DOWN;
 	TankFrame tf;
-	Group group;
+
 	private Random random = new Random();
-	Rectangle rect = new Rectangle();
+
 	FireStrategy ds = new FourDirFireStrategy(); 
 	
 	private boolean moving = true;
 	private boolean living = true;
+	GameModel gm= GameModel.getInstance();;
 	
-	
-	public Tank(int x, int y, Dir dir,TankFrame tf,Group group) {
+	public Tank(int x, int y, Dir dir, Group group) {
 		super();
 		this.x = x;
 		this.y = y;
 		this.dir = dir;
-		this.tf = tf;
 		this.group = group;
 		
 		rect.x = this.x;
 		rect.y = this.y;
 		rect.width = WIDTH;
 		rect.height = HEIGHT;
-		
-		this.repaint();
+
 	}
 
 
 	@Override
 	public void paint(Graphics g) {
-		if(!living) tf.tanks.remove(this);
+		if(!living) gm.remove(this);
 		switch(dir) {
 		case LEFT:
 			g.drawImage(group==Group.BLUE? ResourceMgr.blueTankL : ResourceMgr.redTankL, x,y,null);
@@ -78,7 +81,9 @@ public class Tank extends Frame{
 	}
 
 	private void move() {
-		
+		oldX = x;
+		oldY = y;
+
 		if(!moving) return;
 		switch(dir) {
 		case LEFT:
@@ -170,17 +175,16 @@ public class Tank extends Frame{
 	}
 
 
-	public static void main(String[] args) {
-		// TODO Auto-generated method stub
-
-	}
-
-
 	public void die() {
 		this.living = false;
-		
+
 	}
 
+	public void back() {
+		x = oldX ;
+		y = oldY ;
+
+	}
 
 
 }

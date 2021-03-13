@@ -1,11 +1,14 @@
 package com.shunyu.tankGame;
 
-import java.awt.Color;
-import java.awt.Frame;
+import com.shunyu.GameModel.GameModel;
+import com.shunyu.abstractfactory.BaseBullet;
+import com.shunyu.abstractfactory.BaseTank;
+import com.shunyu.entity.GameObject;
+
 import java.awt.Graphics;
 import java.awt.Rectangle;
 
-public class Bullet extends Frame{
+public class Bullet extends GameObject {
 	private static final int SPEED = 10;
 
 	static final int WIDTH = ResourceMgr.bulletD.getWidth();
@@ -13,23 +16,22 @@ public class Bullet extends Frame{
 	
 	private int x,y;
 	private Dir dir;
-	private TankFrame tf;
 	private Group group;
 	
-	Rectangle rect = new Rectangle();
+	public Rectangle rect = new Rectangle();
 	
 	
 	private boolean living = true;
 	
-	
+	GameModel gm ;
 	
 
-	public Bullet(int x, int y, Dir dir,TankFrame tf,Group group) {
+	public Bullet(int x, int y, Dir dir, Group group) {
 		super();
 		this.x = x;
 		this.y = y;
 		this.dir = dir;
-		this.tf = tf;
+		this.gm = GameModel.getInstance();
 		this.group = group;
 		
 		
@@ -38,7 +40,7 @@ public class Bullet extends Frame{
 		rect.width = WIDTH;
 		rect.height = HEIGHT;
 		
-		tf.bs.add(this);
+		gm.add(this);
 		
 	}
 
@@ -46,7 +48,9 @@ public class Bullet extends Frame{
 
 	@Override
 	public void paint(Graphics g) {
-		if(!living) tf.bs.remove(this);
+		if(!living) {
+			gm.remove(this);
+		}
 		
 		
 		switch(dir) {
@@ -95,19 +99,22 @@ public class Bullet extends Frame{
 			living = false;
 		}
 	}
-	
-	public void collideWith(Tank t) {
-		if(this.group == t.getGroup()) return;
+
+	public boolean collideWith(Tank t) {
+		if(this.group == t.group) {
+			return false;
+		}
 		
 		if(this.rect.intersects(t.rect)) {
 			t.die();
 			this.die();
 			
-			int eX = t.getX() + t.WIDTH/2 - Explode.WIDTH/2;
-			int eY = t.getY() + t.HEIGHT/2 - Explode.HEIGHT/2;
+			int eX = t.getX() + Tank.WIDTH /2 - Explode.WIDTH/2;
+			int eY = t.getY() + Tank.HEIGHT /2 - Explode.HEIGHT/2;
 			
 			
-			tf.explodes.add(new Explode(eX,eY,this.tf));
+			gm.add(new Explode(eX,eY));
+
 			
 			new Thread( new Runnable() {
 				@Override
@@ -116,15 +123,16 @@ public class Bullet extends Frame{
 					
 				}
 			}).start();
-			
+			return true;
 			
 		}
-		
-	} 
-	
-	private void die() {
+
+		return false;
+	}
+
+	public void die() {
 		this.living = false;
-		
+
 	}
 
 

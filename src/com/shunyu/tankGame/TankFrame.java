@@ -1,5 +1,7 @@
 package com.shunyu.tankGame;
 
+import com.shunyu.GameModel.GameModel;
+
 import java.awt.Frame;
 import java.awt.Graphics;
 import java.awt.event.KeyAdapter;
@@ -12,15 +14,15 @@ import java.awt.Color;
 
 public class TankFrame extends Frame{
 
+	GameModel gm = GameModel.getInstance();
+
 	static final int GAME_WIDTH = 1080;
 	static final int GAME_HEIGHT = 720;
-	ArrayList<Bullet> bs = new ArrayList<>();
-	ArrayList<Tank> tanks = new ArrayList<>();
-	ArrayList<Explode> explodes = new ArrayList<>();
-	Tank t = new Tank(200,200,Dir.DOWN,this,Group.BLUE);
+
 	DefaultFireStrategy ds = new DefaultFireStrategy(); 
-	 
-	
+
+
+
 	public TankFrame() {
 		setSize(GAME_WIDTH,GAME_HEIGHT);
 		setResizable(false);
@@ -39,28 +41,8 @@ public class TankFrame extends Frame{
 	}
 	
 	@Override
-	public void paint(Graphics g) { 
-		t.paint(g);
-		
-		for(int i = 0; i<bs.size();i++) {
-			bs.get(i).paint(g);
-		}
-		
-		for(int i = 0; i<tanks.size();i++) {
-			tanks.get(i).paint(g);
-		}
-		
-		for(int i = 0; i<explodes.size();i++) {
-			explodes.get(i).paint(g);
-		}
-		
-		for(int i = 0; i<bs.size() ; i++) {
-			for(int j = 0; j<tanks.size() ; j++) {
-				bs.get(i).collideWith(tanks.get(j));
-			}
-			bs.get(i).collideWith(t);
-			
-		}
+	public void paint(Graphics g) {
+		gm.paint(g);
 	}
 	
 	Image offScreenImage = null;
@@ -108,7 +90,7 @@ public class TankFrame extends Frame{
 				bD = true;
 				break;
 			case KeyEvent.VK_X:
-				t.fire();
+				gm.getMainTank().fire();
 			default:
 				break;
 			}
@@ -118,13 +100,13 @@ public class TankFrame extends Frame{
 
 		private void setMainTankDir() {
 			if(!bR && !bU && !bD && !bL) {
-				t.setMoving(false);
+				gm.getMainTank().setMoving(false);
 			}else{
-				t.setMoving(true);
-				if(bR) t.setDir(Dir.RIGHT);
-				if(bL) t.setDir(Dir.LEFT);
-				if(bD) t.setDir(Dir.DOWN);
-				if(bU) t.setDir(Dir.UP);
+				gm.getMainTank().setMoving(true);
+				if(bR) gm.getMainTank().setDir(Dir.RIGHT);
+				if(bL) gm.getMainTank().setDir(Dir.LEFT);
+				if(bD) gm.getMainTank().setDir(Dir.DOWN);
+				if(bU) gm.getMainTank().setDir(Dir.UP);
 			}
 			
 			

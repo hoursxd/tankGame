@@ -2,9 +2,11 @@ package com.shunyu.tankGame;
 
 import java.awt.Graphics;
 
-import abstractfactory.BaseExplode;
+import com.shunyu.GameModel.GameModel;
+import com.shunyu.abstractfactory.BaseExplode;
+import com.shunyu.entity.GameObject;
 
-public class Explode extends BaseExplode{
+public class Explode extends GameObject {
 
 	static final int WIDTH = ResourceMgr.explodes[0].getWidth();
 
@@ -16,21 +18,23 @@ public class Explode extends BaseExplode{
 	
 	private int step = 0;
 
-	public Explode(int x, int y, TankFrame tf) {
+	GameModel gm;
+	public Explode(int x, int y) {
 		super();
 		this.x = x;
 		this.y = y;
-		this.tf = tf;
+		this.gm = GameModel.getInstance();
 		
 		
 	}
 	
+	@Override
 	public void paint(Graphics g) {
 		
 		g.drawImage(ResourceMgr.explodes[step++],x,y,null);
 		
 		if(step >= ResourceMgr.explodes.length) {
-			tf.explodes.remove(this);
+			gm.remove(this);
 		}
 		
 	}
