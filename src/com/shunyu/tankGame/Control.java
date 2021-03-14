@@ -146,7 +146,7 @@ public class Control extends KeyAdapter {
     public void btnSound(int opt) {
         switch (opt) {
             case 1:
-                new Thread(() -> new Audio("audio/btn_enter.wav").play()).start();
+                new Thread(() -> new Audio("audio/btn_select.wav").play()).start();
                 break;
             case 2:
                 new Thread(() -> new Audio("audio/btn_enter.wav").play()).start();
