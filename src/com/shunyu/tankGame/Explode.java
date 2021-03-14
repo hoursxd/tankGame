@@ -3,7 +3,6 @@ package com.shunyu.tankGame;
 import java.awt.Graphics;
 
 import com.shunyu.GameModel.GameModel;
-import com.shunyu.abstractfactory.BaseExplode;
 import com.shunyu.entity.GameObject;
 
 public class Explode extends GameObject {
@@ -14,7 +13,7 @@ public class Explode extends GameObject {
 	
 	private int x,y;
 	private boolean living = true;
-	TankFrame tf = null;
+	GameFrame tf = null;
 	
 	private int step = 0;
 

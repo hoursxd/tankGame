@@ -3,7 +3,6 @@ package com.shunyu.abstractfactory;
 import com.shunyu.GameModel.GameModel;
 import com.shunyu.tankGame.Dir;
 import com.shunyu.tankGame.Group;
-import com.shunyu.tankGame.TankFrame;
 
 public abstract class GameFactory {
 
