@@ -44,7 +44,31 @@ public class Control extends KeyAdapter {
                 menuControl(key);
                 break;
             case 1:
-                singleControl(key);
+                singleControlPressed(key);
+                break;
+            default:
+                break;
+        }
+    }
+
+    @Override
+    public void keyReleased(KeyEvent e) {
+
+        int key = e.getKeyCode();
+
+        /**
+         * gameState默认是0 菜单
+         * 1 单人游戏
+         * 2 多人游戏
+         * 根据游戏菜单的selector改变
+         */
+
+        switch (gameState) {
+            case 0:
+//                menuControl(key);
+                break;
+            case 1:
+                singleControlReleased(key);
                 break;
             default:
                 break;
@@ -89,31 +113,27 @@ public class Control extends KeyAdapter {
     }
 
     /**
-     * 单人游戏页面键盘控制
+     * 单人游戏页面键盘 按下按键控制
      * @param key 获取的按键
      */
-    private void singleControl(int key) {
+    private void singleControlPressed(int key) {
         switch (key) {
             case KeyEvent.VK_A:
-//                System.out.println("-a-");
             case KeyEvent.VK_LEFT:
                 bL = true;
                 break;
 
             case KeyEvent.VK_W:
-//                System.out.println("-w-");
             case KeyEvent.VK_UP:
                 bU = true;
                 break;
 
             case KeyEvent.VK_D:
-//                System.out.println("-d-");
             case KeyEvent.VK_RIGHT:
                 bR = true;
                 break;
 
             case KeyEvent.VK_S:
-//                System.out.println("-s-");
             case KeyEvent.VK_DOWN:
                 bD = true;
                 break;
@@ -128,31 +148,40 @@ public class Control extends KeyAdapter {
         setMainTankDir();
     }
 
-    @Override
-    public void keyReleased(KeyEvent e) {
-        int key = e.getKeyCode();
+    /**
+     * 单人游戏页面键盘 松开按键的控制
+     * @param key
+     */
+    private void singleControlReleased(int key) {
         switch(key) {
-        case KeyEvent.VK_LEFT:
-            bL = false;
-            break;
-        case KeyEvent.VK_UP:
-            bU = false;
-            break;
-        case KeyEvent.VK_RIGHT:
-            bR = false;
-            break;
-        case KeyEvent.VK_DOWN:
-            bD = false;
-            break;
-        default:
-            break;
+            case KeyEvent.VK_A:
+            case KeyEvent.VK_LEFT:
+                bL = false;
+                break;
+
+            case KeyEvent.VK_W:
+            case KeyEvent.VK_UP:
+                bU = false;
+                break;
+
+            case KeyEvent.VK_D:
+            case KeyEvent.VK_RIGHT:
+                bR = false;
+                break;
+
+            case KeyEvent.VK_S:
+            case KeyEvent.VK_DOWN:
+                bD = false;
+                break;
+            default:
+                break;
         }
 
         setMainTankDir();
     }
 
     /**
-     * 坦克方向设置 可能需要移动位置，疑似存在bug
+     * 坦克方向设置 可能需要换个位置
      */
     public void setMainTankDir() {
         if (!bR && !bU && !bD && !bL) {

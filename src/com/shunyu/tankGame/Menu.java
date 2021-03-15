@@ -9,29 +9,29 @@ public class Menu {
 
     /**
      * 游戏菜单显示
-     * @param g
+     * @param gOffScreen
      */
-    public static void showMenu(Graphics g){
+    public static void showMenu(Graphics gOffScreen){
 
         int selector = Control.selector;
         int gameState = Control.gameState;
 
-        g.setColor(Color.BLACK);
-        g.fillRect(0, 0, GAME_WIDTH, GAME_HEIGHT);
+        gOffScreen.setColor(Color.BLACK);
+        gOffScreen.fillRect(0, 0, GAME_WIDTH, GAME_HEIGHT);
 
         Image bgImage = Toolkit.getDefaultToolkit().getImage("src/images/tank_bg_gray.jpg");
-        g.drawImage(bgImage, 0, 0, null);
+        gOffScreen.drawImage(bgImage, 0, 0, null);
 
-        g.setColor(Color.WHITE);
-        g.setFont(new Font("宋体", Font.BOLD, 28));
+        gOffScreen.setColor(Color.WHITE);
+        gOffScreen.setFont(new Font("宋体", Font.BOLD, 28));
 
         for (int i = 0; i < MENUS.length; i++) {
             if (i == selector) {
-                g.setColor(Color.RED);
+                gOffScreen.setColor(Color.RED);
             } else {
-                g.setColor(Color.WHITE);
+                gOffScreen.setColor(Color.WHITE);
             }
-            g.drawString(MENUS[i], 480, i * 50 + 300);
+            gOffScreen.drawString(MENUS[i], 480, i * 50 + 300);
         }
     }
 
