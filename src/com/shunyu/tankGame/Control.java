@@ -46,7 +46,8 @@ public class Control extends KeyAdapter {
             case 1:
                 singleControl(key);
                 break;
-
+            default:
+                break;
         }
     }
 
@@ -81,6 +82,8 @@ public class Control extends KeyAdapter {
                 btnSound(2);
                 gameState = selector + 1;
 //                menuEnter(gameState);
+                break;
+            default:
                 break;
         }
     }
@@ -118,7 +121,33 @@ public class Control extends KeyAdapter {
             case KeyEvent.VK_X:
                 gm.getMainTank().fire();
 
+            default:
+                break;
+
         }
+        setMainTankDir();
+    }
+
+    @Override
+    public void keyReleased(KeyEvent e) {
+        int key = e.getKeyCode();
+        switch(key) {
+        case KeyEvent.VK_LEFT:
+            bL = false;
+            break;
+        case KeyEvent.VK_UP:
+            bU = false;
+            break;
+        case KeyEvent.VK_RIGHT:
+            bR = false;
+            break;
+        case KeyEvent.VK_DOWN:
+            bD = false;
+            break;
+        default:
+            break;
+        }
+
         setMainTankDir();
     }
 
