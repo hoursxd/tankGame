@@ -1,5 +1,7 @@
 package com.shunyu.tankGame;
 
+import com.shunyu.util.ImageUtil;
+
 import java.awt.image.BufferedImage;
 import java.io.IOException;
 
