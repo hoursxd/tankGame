@@ -138,6 +138,7 @@ public class Control extends KeyAdapter {
                 bD = true;
                 break;
 
+            case KeyEvent.VK_F:
             case KeyEvent.VK_X:
                 gm.getMainTank().fire();
 

@@ -17,6 +17,7 @@ public class GameFrame extends Frame{
 	DefaultFireStrategy ds = new DefaultFireStrategy();
 	Image offScreenImage = null;
 
+
 	public GameFrame() {
 		gameInit();
 		gameWindowListener();
@@ -56,7 +57,11 @@ public class GameFrame extends Frame{
 
 	@Override
 	public void paint(Graphics g) {
-		gm.paint(g);
+		int gameState = Control.gameState;
+		if(gameState==1){
+			gm.paint(g);
+		}
+
 	}
 
 	@Override
